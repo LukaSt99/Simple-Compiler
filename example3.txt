@@ -1,0 +1,27 @@
+mainclass example3 { 
+	public static void main ( )
+		{  
+			int a;
+			a=3;
+			int b,whilec;
+			b=2;
+			whilec=b+2;
+			if(a>5)  
+			{
+			
+				println(whilec);    	
+				whilec=whilec+1;
+				
+			}
+			else 
+			{
+				println(b);
+				whilec=whilec+1;
+				println(whilec);
+			}
+			
+			
+			
+			
+		}
+}

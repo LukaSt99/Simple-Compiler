@@ -1,0 +1,1096 @@
+   0  $accept : Program $end
+
+   1  Program : T_mainclass I_D T_lbrack T_public T_static T_void T_main T_lparen T_rparen Comp_Stmt T_rbrack
+
+   2  Comp_Stmt : T_lbrack Stmt_List T_rbrack
+
+   3  Stmt_List : Stmt_List Stmt
+   4            | Stmt
+
+   5  Stmt : Assign_Stmt
+   6       | For_Stmt
+   7       | While_Stmt
+   8       | If_Stmt
+   9       | Comp_Stmt
+  10       | Declaration
+  11       | Null_Stmt
+  12       | T_println T_lparen Expr T_rparen T_semi
+
+  13  Declaration : Type Id_List T_semi
+
+  14  Type : T_int
+  15       | T_float
+
+  16  Id_List : Id_List T_comma I_D
+  17          | I_D
+
+  18  Null_Stmt : T_semi
+
+  19  Assign_Stmt : Assign_Expr T_semi
+
+  20  Assign_Expr : I_Dv T_e Expr
+
+  21  Expr : Assign_Expr
+  22       | Rval
+
+  23  For_Stmt : T_for T_lparen Opassign_Expr T_semi Opbool_Expr T_semi Opassign_Expr T_rparen Stmt
+
+  24  Opassign_Expr : Assign_Expr
+  25                |
+
+  26  Opbool_Expr : Bool_Expr
+  27              |
+
+  28  While_Stmt : T_while T_lparen Bool_Expr T_rparen Stmt
+
+  29  If_Stmt : T_if T_lparen Bool_Expr T_rparen Stmt Else_Part
+
+  30  Else_Part : T_else Stmt
+  31            |
+
+  32  Bool_Expr : Expr C_Op Expr
+
+  33  C_Op : T_eq
+  34       | T_lt
+  35       | T_gt
+  36       | T_le
+  37       | T_ge
+  38       | T_neq
+
+  39  Rval : Rval T_plus Term
+  40       | Rval T_minus Term
+  41       | Term
+
+  42  Term : Term T_mult Factor
+  43       | Term T_div Factor
+  44       | Factor
+
+  45  Factor : T_lparen Expr T_rparen
+  46         | T_minus Factor
+  47         | I_Dv
+  48         | NUM
+
+  49  NUM : int_num
+  50      | float_num
+
+  51  I_D : id
+
+  52  I_Dv : id
+
+state 0
+	$accept : . Program $end  (0)
+
+	T_mainclass  shift 1
+	.  error
+
+	Program  goto 2
+
+
+state 1
+	Program : T_mainclass . I_D T_lbrack T_public T_static T_void T_main T_lparen T_rparen Comp_Stmt T_rbrack  (1)
+
+	id  shift 3
+	.  error
+
+	I_D  goto 4
+
+
+state 2
+	$accept : Program . $end  (0)
+
+	$end  accept
+
+
+state 3
+	I_D : id .  (51)
+
+	.  reduce 51
+
+
+state 4
+	Program : T_mainclass I_D . T_lbrack T_public T_static T_void T_main T_lparen T_rparen Comp_Stmt T_rbrack  (1)
+
+	T_lbrack  shift 5
+	.  error
+
+
+state 5
+	Program : T_mainclass I_D T_lbrack . T_public T_static T_void T_main T_lparen T_rparen Comp_Stmt T_rbrack  (1)
+
+	T_public  shift 6
+	.  error
+
+
+state 6
+	Program : T_mainclass I_D T_lbrack T_public . T_static T_void T_main T_lparen T_rparen Comp_Stmt T_rbrack  (1)
+
+	T_static  shift 7
+	.  error
+
+
+state 7
+	Program : T_mainclass I_D T_lbrack T_public T_static . T_void T_main T_lparen T_rparen Comp_Stmt T_rbrack  (1)
+
+	T_void  shift 8
+	.  error
+
+
+state 8
+	Program : T_mainclass I_D T_lbrack T_public T_static T_void . T_main T_lparen T_rparen Comp_Stmt T_rbrack  (1)
+
+	T_main  shift 9
+	.  error
+
+
+state 9
+	Program : T_mainclass I_D T_lbrack T_public T_static T_void T_main . T_lparen T_rparen Comp_Stmt T_rbrack  (1)
+
+	T_lparen  shift 10
+	.  error
+
+
+state 10
+	Program : T_mainclass I_D T_lbrack T_public T_static T_void T_main T_lparen . T_rparen Comp_Stmt T_rbrack  (1)
+
+	T_rparen  shift 11
+	.  error
+
+
+state 11
+	Program : T_mainclass I_D T_lbrack T_public T_static T_void T_main T_lparen T_rparen . Comp_Stmt T_rbrack  (1)
+
+	T_lbrack  shift 12
+	.  error
+
+	Comp_Stmt  goto 13
+
+
+state 12
+	Comp_Stmt : T_lbrack . Stmt_List T_rbrack  (2)
+
+	T_println  shift 14
+	T_for  shift 15
+	T_while  shift 16
+	T_if  shift 17
+	T_semi  shift 18
+	T_lbrack  shift 12
+	id  shift 19
+	T_int  shift 20
+	T_float  shift 21
+	.  error
+
+	Comp_Stmt  goto 22
+	Stmt_List  goto 23
+	Stmt  goto 24
+	Type  goto 25
+	For_Stmt  goto 26
+	While_Stmt  goto 27
+	Declaration  goto 28
+	Null_Stmt  goto 29
+	If_Stmt  goto 30
+	I_Dv  goto 31
+	Assign_Stmt  goto 32
+	Assign_Expr  goto 33
+
+
+state 13
+	Program : T_mainclass I_D T_lbrack T_public T_static T_void T_main T_lparen T_rparen Comp_Stmt . T_rbrack  (1)
+
+	T_rbrack  shift 34
+	.  error
+
+
+state 14
+	Stmt : T_println . T_lparen Expr T_rparen T_semi  (12)
+
+	T_lparen  shift 35
+	.  error
+
+
+state 15
+	For_Stmt : T_for . T_lparen Opassign_Expr T_semi Opbool_Expr T_semi Opassign_Expr T_rparen Stmt  (23)
+
+	T_lparen  shift 36
+	.  error
+
+
+state 16
+	While_Stmt : T_while . T_lparen Bool_Expr T_rparen Stmt  (28)
+
+	T_lparen  shift 37
+	.  error
+
+
+state 17
+	If_Stmt : T_if . T_lparen Bool_Expr T_rparen Stmt Else_Part  (29)
+
+	T_lparen  shift 38
+	.  error
+
+
+state 18
+	Null_Stmt : T_semi .  (18)
+
+	.  reduce 18
+
+
+state 19
+	I_Dv : id .  (52)
+
+	.  reduce 52
+
+
+state 20
+	Type : T_int .  (14)
+
+	.  reduce 14
+
+
+state 21
+	Type : T_float .  (15)
+
+	.  reduce 15
+
+
+state 22
+	Stmt : Comp_Stmt .  (9)
+
+	.  reduce 9
+
+
+state 23
+	Comp_Stmt : T_lbrack Stmt_List . T_rbrack  (2)
+	Stmt_List : Stmt_List . Stmt  (3)
+
+	T_println  shift 14
+	T_for  shift 15
+	T_while  shift 16
+	T_if  shift 17
+	T_semi  shift 18
+	T_lbrack  shift 12
+	T_rbrack  shift 39
+	id  shift 19
+	T_int  shift 20
+	T_float  shift 21
+	.  error
+
+	Comp_Stmt  goto 22
+	Stmt  goto 40
+	Type  goto 25
+	For_Stmt  goto 26
+	While_Stmt  goto 27
+	Declaration  goto 28
+	Null_Stmt  goto 29
+	If_Stmt  goto 30
+	I_Dv  goto 31
+	Assign_Stmt  goto 32
+	Assign_Expr  goto 33
+
+
+state 24
+	Stmt_List : Stmt .  (4)
+
+	.  reduce 4
+
+
+state 25
+	Declaration : Type . Id_List T_semi  (13)
+
+	id  shift 3
+	.  error
+
+	Id_List  goto 41
+	I_D  goto 42
+
+
+state 26
+	Stmt : For_Stmt .  (6)
+
+	.  reduce 6
+
+
+state 27
+	Stmt : While_Stmt .  (7)
+
+	.  reduce 7
+
+
+state 28
+	Stmt : Declaration .  (10)
+
+	.  reduce 10
+
+
+state 29
+	Stmt : Null_Stmt .  (11)
+
+	.  reduce 11
+
+
+state 30
+	Stmt : If_Stmt .  (8)
+
+	.  reduce 8
+
+
+state 31
+	Assign_Expr : I_Dv . T_e Expr  (20)
+
+	T_e  shift 43
+	.  error
+
+
+state 32
+	Stmt : Assign_Stmt .  (5)
+
+	.  reduce 5
+
+
+state 33
+	Assign_Stmt : Assign_Expr . T_semi  (19)
+
+	T_semi  shift 44
+	.  error
+
+
+state 34
+	Program : T_mainclass I_D T_lbrack T_public T_static T_void T_main T_lparen T_rparen Comp_Stmt T_rbrack .  (1)
+
+	.  reduce 1
+
+
+state 35
+	Stmt : T_println T_lparen . Expr T_rparen T_semi  (12)
+
+	T_minus  shift 45
+	T_lparen  shift 46
+	int_num  shift 47
+	float_num  shift 48
+	id  shift 19
+	.  error
+
+	Expr  goto 49
+	Rval  goto 50
+	Term  goto 51
+	Factor  goto 52
+	I_Dv  goto 53
+	Assign_Expr  goto 54
+	NUM  goto 55
+
+
+state 36
+	For_Stmt : T_for T_lparen . Opassign_Expr T_semi Opbool_Expr T_semi Opassign_Expr T_rparen Stmt  (23)
+	Opassign_Expr : .  (25)
+
+	id  shift 19
+	T_semi  reduce 25
+
+	Opassign_Expr  goto 56
+	I_Dv  goto 31
+	Assign_Expr  goto 57
+
+
+state 37
+	While_Stmt : T_while T_lparen . Bool_Expr T_rparen Stmt  (28)
+
+	T_minus  shift 45
+	T_lparen  shift 46
+	int_num  shift 47
+	float_num  shift 48
+	id  shift 19
+	.  error
+
+	Expr  goto 58
+	Bool_Expr  goto 59
+	Rval  goto 50
+	Term  goto 51
+	Factor  goto 52
+	I_Dv  goto 53
+	Assign_Expr  goto 54
+	NUM  goto 55
+
+
+state 38
+	If_Stmt : T_if T_lparen . Bool_Expr T_rparen Stmt Else_Part  (29)
+
+	T_minus  shift 45
+	T_lparen  shift 46
+	int_num  shift 47
+	float_num  shift 48
+	id  shift 19
+	.  error
+
+	Expr  goto 58
+	Bool_Expr  goto 60
+	Rval  goto 50
+	Term  goto 51
+	Factor  goto 52
+	I_Dv  goto 53
+	Assign_Expr  goto 54
+	NUM  goto 55
+
+
+state 39
+	Comp_Stmt : T_lbrack Stmt_List T_rbrack .  (2)
+
+	.  reduce 2
+
+
+state 40
+	Stmt_List : Stmt_List Stmt .  (3)
+
+	.  reduce 3
+
+
+state 41
+	Declaration : Type Id_List . T_semi  (13)
+	Id_List : Id_List . T_comma I_D  (16)
+
+	T_comma  shift 61
+	T_semi  shift 62
+	.  error
+
+
+state 42
+	Id_List : I_D .  (17)
+
+	.  reduce 17
+
+
+state 43
+	Assign_Expr : I_Dv T_e . Expr  (20)
+
+	T_minus  shift 45
+	T_lparen  shift 46
+	int_num  shift 47
+	float_num  shift 48
+	id  shift 19
+	.  error
+
+	Expr  goto 63
+	Rval  goto 50
+	Term  goto 51
+	Factor  goto 52
+	I_Dv  goto 53
+	Assign_Expr  goto 54
+	NUM  goto 55
+
+
+state 44
+	Assign_Stmt : Assign_Expr T_semi .  (19)
+
+	.  reduce 19
+
+
+state 45
+	Factor : T_minus . Factor  (46)
+
+	T_minus  shift 45
+	T_lparen  shift 46
+	int_num  shift 47
+	float_num  shift 48
+	id  shift 19
+	.  error
+
+	Factor  goto 64
+	I_Dv  goto 65
+	NUM  goto 55
+
+
+state 46
+	Factor : T_lparen . Expr T_rparen  (45)
+
+	T_minus  shift 45
+	T_lparen  shift 46
+	int_num  shift 47
+	float_num  shift 48
+	id  shift 19
+	.  error
+
+	Expr  goto 66
+	Rval  goto 50
+	Term  goto 51
+	Factor  goto 52
+	I_Dv  goto 53
+	Assign_Expr  goto 54
+	NUM  goto 55
+
+
+state 47
+	NUM : int_num .  (49)
+
+	.  reduce 49
+
+
+state 48
+	NUM : float_num .  (50)
+
+	.  reduce 50
+
+
+state 49
+	Stmt : T_println T_lparen Expr . T_rparen T_semi  (12)
+
+	T_rparen  shift 67
+	.  error
+
+
+state 50
+	Expr : Rval .  (22)
+	Rval : Rval . T_plus Term  (39)
+	Rval : Rval . T_minus Term  (40)
+
+	T_plus  shift 68
+	T_minus  shift 69
+	T_semi  reduce 22
+	T_rparen  reduce 22
+	T_eq  reduce 22
+	T_lt  reduce 22
+	T_gt  reduce 22
+	T_le  reduce 22
+	T_ge  reduce 22
+	T_neq  reduce 22
+
+
+state 51
+	Rval : Term .  (41)
+	Term : Term . T_mult Factor  (42)
+	Term : Term . T_div Factor  (43)
+
+	T_mult  shift 70
+	T_div  shift 71
+	T_plus  reduce 41
+	T_minus  reduce 41
+	T_semi  reduce 41
+	T_rparen  reduce 41
+	T_eq  reduce 41
+	T_lt  reduce 41
+	T_gt  reduce 41
+	T_le  reduce 41
+	T_ge  reduce 41
+	T_neq  reduce 41
+
+
+state 52
+	Term : Factor .  (44)
+
+	.  reduce 44
+
+
+state 53
+	Assign_Expr : I_Dv . T_e Expr  (20)
+	Factor : I_Dv .  (47)
+
+	T_e  shift 43
+	T_plus  reduce 47
+	T_minus  reduce 47
+	T_mult  reduce 47
+	T_div  reduce 47
+	T_semi  reduce 47
+	T_rparen  reduce 47
+	T_eq  reduce 47
+	T_lt  reduce 47
+	T_gt  reduce 47
+	T_le  reduce 47
+	T_ge  reduce 47
+	T_neq  reduce 47
+
+
+state 54
+	Expr : Assign_Expr .  (21)
+
+	.  reduce 21
+
+
+state 55
+	Factor : NUM .  (48)
+
+	.  reduce 48
+
+
+state 56
+	For_Stmt : T_for T_lparen Opassign_Expr . T_semi Opbool_Expr T_semi Opassign_Expr T_rparen Stmt  (23)
+
+	T_semi  shift 72
+	.  error
+
+
+state 57
+	Opassign_Expr : Assign_Expr .  (24)
+
+	.  reduce 24
+
+
+state 58
+	Bool_Expr : Expr . C_Op Expr  (32)
+
+	T_eq  shift 73
+	T_lt  shift 74
+	T_gt  shift 75
+	T_le  shift 76
+	T_ge  shift 77
+	T_neq  shift 78
+	.  error
+
+	C_Op  goto 79
+
+
+state 59
+	While_Stmt : T_while T_lparen Bool_Expr . T_rparen Stmt  (28)
+
+	T_rparen  shift 80
+	.  error
+
+
+state 60
+	If_Stmt : T_if T_lparen Bool_Expr . T_rparen Stmt Else_Part  (29)
+
+	T_rparen  shift 81
+	.  error
+
+
+state 61
+	Id_List : Id_List T_comma . I_D  (16)
+
+	id  shift 3
+	.  error
+
+	I_D  goto 82
+
+
+state 62
+	Declaration : Type Id_List T_semi .  (13)
+
+	.  reduce 13
+
+
+state 63
+	Assign_Expr : I_Dv T_e Expr .  (20)
+
+	.  reduce 20
+
+
+state 64
+	Factor : T_minus Factor .  (46)
+
+	.  reduce 46
+
+
+state 65
+	Factor : I_Dv .  (47)
+
+	.  reduce 47
+
+
+state 66
+	Factor : T_lparen Expr . T_rparen  (45)
+
+	T_rparen  shift 83
+	.  error
+
+
+state 67
+	Stmt : T_println T_lparen Expr T_rparen . T_semi  (12)
+
+	T_semi  shift 84
+	.  error
+
+
+state 68
+	Rval : Rval T_plus . Term  (39)
+
+	T_minus  shift 45
+	T_lparen  shift 46
+	int_num  shift 47
+	float_num  shift 48
+	id  shift 19
+	.  error
+
+	Term  goto 85
+	Factor  goto 52
+	I_Dv  goto 65
+	NUM  goto 55
+
+
+state 69
+	Rval : Rval T_minus . Term  (40)
+
+	T_minus  shift 45
+	T_lparen  shift 46
+	int_num  shift 47
+	float_num  shift 48
+	id  shift 19
+	.  error
+
+	Term  goto 86
+	Factor  goto 52
+	I_Dv  goto 65
+	NUM  goto 55
+
+
+state 70
+	Term : Term T_mult . Factor  (42)
+
+	T_minus  shift 45
+	T_lparen  shift 46
+	int_num  shift 47
+	float_num  shift 48
+	id  shift 19
+	.  error
+
+	Factor  goto 87
+	I_Dv  goto 65
+	NUM  goto 55
+
+
+state 71
+	Term : Term T_div . Factor  (43)
+
+	T_minus  shift 45
+	T_lparen  shift 46
+	int_num  shift 47
+	float_num  shift 48
+	id  shift 19
+	.  error
+
+	Factor  goto 88
+	I_Dv  goto 65
+	NUM  goto 55
+
+
+state 72
+	For_Stmt : T_for T_lparen Opassign_Expr T_semi . Opbool_Expr T_semi Opassign_Expr T_rparen Stmt  (23)
+	Opbool_Expr : .  (27)
+
+	T_minus  shift 45
+	T_lparen  shift 46
+	int_num  shift 47
+	float_num  shift 48
+	id  shift 19
+	T_semi  reduce 27
+
+	Expr  goto 58
+	Bool_Expr  goto 89
+	Opbool_Expr  goto 90
+	Rval  goto 50
+	Term  goto 51
+	Factor  goto 52
+	I_Dv  goto 53
+	Assign_Expr  goto 54
+	NUM  goto 55
+
+
+state 73
+	C_Op : T_eq .  (33)
+
+	.  reduce 33
+
+
+state 74
+	C_Op : T_lt .  (34)
+
+	.  reduce 34
+
+
+state 75
+	C_Op : T_gt .  (35)
+
+	.  reduce 35
+
+
+state 76
+	C_Op : T_le .  (36)
+
+	.  reduce 36
+
+
+state 77
+	C_Op : T_ge .  (37)
+
+	.  reduce 37
+
+
+state 78
+	C_Op : T_neq .  (38)
+
+	.  reduce 38
+
+
+state 79
+	Bool_Expr : Expr C_Op . Expr  (32)
+
+	T_minus  shift 45
+	T_lparen  shift 46
+	int_num  shift 47
+	float_num  shift 48
+	id  shift 19
+	.  error
+
+	Expr  goto 91
+	Rval  goto 50
+	Term  goto 51
+	Factor  goto 52
+	I_Dv  goto 53
+	Assign_Expr  goto 54
+	NUM  goto 55
+
+
+state 80
+	While_Stmt : T_while T_lparen Bool_Expr T_rparen . Stmt  (28)
+
+	T_println  shift 14
+	T_for  shift 15
+	T_while  shift 16
+	T_if  shift 17
+	T_semi  shift 18
+	T_lbrack  shift 12
+	id  shift 19
+	T_int  shift 20
+	T_float  shift 21
+	.  error
+
+	Comp_Stmt  goto 22
+	Stmt  goto 92
+	Type  goto 25
+	For_Stmt  goto 26
+	While_Stmt  goto 27
+	Declaration  goto 28
+	Null_Stmt  goto 29
+	If_Stmt  goto 30
+	I_Dv  goto 31
+	Assign_Stmt  goto 32
+	Assign_Expr  goto 33
+
+
+state 81
+	If_Stmt : T_if T_lparen Bool_Expr T_rparen . Stmt Else_Part  (29)
+
+	T_println  shift 14
+	T_for  shift 15
+	T_while  shift 16
+	T_if  shift 17
+	T_semi  shift 18
+	T_lbrack  shift 12
+	id  shift 19
+	T_int  shift 20
+	T_float  shift 21
+	.  error
+
+	Comp_Stmt  goto 22
+	Stmt  goto 93
+	Type  goto 25
+	For_Stmt  goto 26
+	While_Stmt  goto 27
+	Declaration  goto 28
+	Null_Stmt  goto 29
+	If_Stmt  goto 30
+	I_Dv  goto 31
+	Assign_Stmt  goto 32
+	Assign_Expr  goto 33
+
+
+state 82
+	Id_List : Id_List T_comma I_D .  (16)
+
+	.  reduce 16
+
+
+state 83
+	Factor : T_lparen Expr T_rparen .  (45)
+
+	.  reduce 45
+
+
+state 84
+	Stmt : T_println T_lparen Expr T_rparen T_semi .  (12)
+
+	.  reduce 12
+
+
+state 85
+	Rval : Rval T_plus Term .  (39)
+	Term : Term . T_mult Factor  (42)
+	Term : Term . T_div Factor  (43)
+
+	T_mult  shift 70
+	T_div  shift 71
+	T_plus  reduce 39
+	T_minus  reduce 39
+	T_semi  reduce 39
+	T_rparen  reduce 39
+	T_eq  reduce 39
+	T_lt  reduce 39
+	T_gt  reduce 39
+	T_le  reduce 39
+	T_ge  reduce 39
+	T_neq  reduce 39
+
+
+state 86
+	Rval : Rval T_minus Term .  (40)
+	Term : Term . T_mult Factor  (42)
+	Term : Term . T_div Factor  (43)
+
+	T_mult  shift 70
+	T_div  shift 71
+	T_plus  reduce 40
+	T_minus  reduce 40
+	T_semi  reduce 40
+	T_rparen  reduce 40
+	T_eq  reduce 40
+	T_lt  reduce 40
+	T_gt  reduce 40
+	T_le  reduce 40
+	T_ge  reduce 40
+	T_neq  reduce 40
+
+
+state 87
+	Term : Term T_mult Factor .  (42)
+
+	.  reduce 42
+
+
+state 88
+	Term : Term T_div Factor .  (43)
+
+	.  reduce 43
+
+
+state 89
+	Opbool_Expr : Bool_Expr .  (26)
+
+	.  reduce 26
+
+
+state 90
+	For_Stmt : T_for T_lparen Opassign_Expr T_semi Opbool_Expr . T_semi Opassign_Expr T_rparen Stmt  (23)
+
+	T_semi  shift 94
+	.  error
+
+
+state 91
+	Bool_Expr : Expr C_Op Expr .  (32)
+
+	.  reduce 32
+
+
+state 92
+	While_Stmt : T_while T_lparen Bool_Expr T_rparen Stmt .  (28)
+
+	.  reduce 28
+
+
+state 93
+	If_Stmt : T_if T_lparen Bool_Expr T_rparen Stmt . Else_Part  (29)
+	Else_Part : .  (31)
+
+	T_else  shift 95
+	T_println  reduce 31
+	T_for  reduce 31
+	T_while  reduce 31
+	T_if  reduce 31
+	T_semi  reduce 31
+	T_lbrack  reduce 31
+	T_rbrack  reduce 31
+	id  reduce 31
+	T_int  reduce 31
+	T_float  reduce 31
+
+	Else_Part  goto 96
+
+
+state 94
+	For_Stmt : T_for T_lparen Opassign_Expr T_semi Opbool_Expr T_semi . Opassign_Expr T_rparen Stmt  (23)
+	Opassign_Expr : .  (25)
+
+	id  shift 19
+	T_rparen  reduce 25
+
+	Opassign_Expr  goto 97
+	I_Dv  goto 31
+	Assign_Expr  goto 57
+
+
+state 95
+	Else_Part : T_else . Stmt  (30)
+
+	T_println  shift 14
+	T_for  shift 15
+	T_while  shift 16
+	T_if  shift 17
+	T_semi  shift 18
+	T_lbrack  shift 12
+	id  shift 19
+	T_int  shift 20
+	T_float  shift 21
+	.  error
+
+	Comp_Stmt  goto 22
+	Stmt  goto 98
+	Type  goto 25
+	For_Stmt  goto 26
+	While_Stmt  goto 27
+	Declaration  goto 28
+	Null_Stmt  goto 29
+	If_Stmt  goto 30
+	I_Dv  goto 31
+	Assign_Stmt  goto 32
+	Assign_Expr  goto 33
+
+
+state 96
+	If_Stmt : T_if T_lparen Bool_Expr T_rparen Stmt Else_Part .  (29)
+
+	.  reduce 29
+
+
+state 97
+	For_Stmt : T_for T_lparen Opassign_Expr T_semi Opbool_Expr T_semi Opassign_Expr . T_rparen Stmt  (23)
+
+	T_rparen  shift 99
+	.  error
+
+
+state 98
+	Else_Part : T_else Stmt .  (30)
+
+	.  reduce 30
+
+
+state 99
+	For_Stmt : T_for T_lparen Opassign_Expr T_semi Opbool_Expr T_semi Opassign_Expr T_rparen . Stmt  (23)
+
+	T_println  shift 14
+	T_for  shift 15
+	T_while  shift 16
+	T_if  shift 17
+	T_semi  shift 18
+	T_lbrack  shift 12
+	id  shift 19
+	T_int  shift 20
+	T_float  shift 21
+	.  error
+
+	Comp_Stmt  goto 22
+	Stmt  goto 100
+	Type  goto 25
+	For_Stmt  goto 26
+	While_Stmt  goto 27
+	Declaration  goto 28
+	Null_Stmt  goto 29
+	If_Stmt  goto 30
+	I_Dv  goto 31
+	Assign_Stmt  goto 32
+	Assign_Expr  goto 33
+
+
+state 100
+	For_Stmt : T_for T_lparen Opassign_Expr T_semi Opbool_Expr T_semi Opassign_Expr T_rparen Stmt .  (23)
+
+	.  reduce 23
+
+
+36 terminals, 26 nonterminals
+53 grammar rules, 101 states

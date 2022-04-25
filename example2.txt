@@ -1,0 +1,20 @@
+mainclass example2 {
+	public static void main ()
+	{
+			float c;
+			float a;
+			a=15.2;
+			c=1.2;
+			while(a!= c){
+			
+				println(c);
+				c=c+1.0;
+				
+			}
+			int b;
+			b=6;
+			println(b);
+			
+			
+	}
+}

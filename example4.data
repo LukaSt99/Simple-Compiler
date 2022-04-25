@@ -1,0 +1,8 @@
+
+.data
+newline: .asciiz  "\n"
+tmp: .word  0
+i: .word  0
+bab: .float 0.0
+a: .float 0.0
+h: .word  0

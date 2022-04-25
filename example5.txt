@@ -1,0 +1,51 @@
+mainclass example5{ 
+	public static void main ( )
+	{  
+				int tmp;
+				float k,h,l;
+				int i; 
+				int bab;
+				bab=1;
+				
+				i=4.2;
+				println(i);
+		
+				k=55.2-1.2*2.396+i;
+				println(k);
+				h=i-2.2-k;
+			
+				
+				l=k*h;
+				
+				println(h);
+				
+				println(l);
+				
+				while(i<10)
+				{
+					while(i<10)
+					{
+						while(i<10)
+					{
+					
+						println(i);
+						tmp=i*8;
+						i=i+1;
+						println(bab);
+						bab=bab+1;
+					}
+						println(i);
+						tmp=i*8;
+						i=i+1;
+						println(bab);
+						bab=bab+1;
+					}
+					println(i);
+					tmp=i*8;
+					i=i+1;
+					println(bab);
+					bab=bab+1;
+				}
+		
+	}
+}
