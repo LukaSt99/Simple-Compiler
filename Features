@@ -1,0 +1,52 @@
+Lexical analysis
+id = letter (letter | digit | ‘_’)*
+num = [1-9] digit* (‘.’ digit*)?
+letter = a | . . . | z | A | . . . | Z
+digit = 0 | . . . | 9
+
+Syntactical analysis
+PROGRAM → mainclass id { public static void main ( ) COMP-STMT }
+COMP-STMT → { STMT-LIST }
+STMT-LIST → STMT-LIST STMT
+          | ε
+STMT → ASSIGN-STMT
+     | FOR-STMT
+     | WHILE-STMT
+     | IF-STMT
+     | COMP-STMT
+     | DECLARATION
+     | NULL-STMT
+     | println (EXPR);
+DECLARATION → TYPE ID-LIST;
+TYPE → int
+     | float
+ID-LIST → id, ID-LIST
+     | id
+NULL-STMT → ;
+ASSIGN-STMT → ASSIGN-EXPR;
+ASSIGN-EXPR → id = EXPR
+EXPR → ASSIGN-EXPR
+     | RVAL
+FOR-STMT → for ( OPASSIGN-EXPR; OPBOOL-EXPR; OPASSIGN-EXPR ) STMT
+OPASSIGN-EXPR → ASSIGN-EXPR
+     | ε
+OPBOOL-EXPR → BOOL-EXPR
+     | ε
+WHILE-STMT → while ( BOOL-EXPR ) STMT
+IF-STMT → if ( BOOL-EXPR ) STMT ELSE-PART
+ELSE-PART → else STMT
+     | ε
+BOOL-EXPR → EXPR C-OP EXPR
+C-OP → == | < | > | <= | >= | !=
+RVAL → RVAL + TERM
+     | RVAL - TERM
+     | TERM
+TERM → TERM * FACTOR
+     | TERM / FACTOR
+     | FACTOR
+FACTOR → ( EXPR )
+     | - FACTOR
+     | id
+     | num
+
+Semantical analysis : in accordance with the syntax of  C/C++
