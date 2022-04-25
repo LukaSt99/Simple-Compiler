@@ -11,7 +11,7 @@
 4.  Your compiler is the executable file a.exe
 
 5. Run the produced compiler for the provided (or other) test input
-		a < example4.txt
+		a < example4.txt (print the result and the syntax tree)
 
 Or you can run the compile.bat in your directory 
 
